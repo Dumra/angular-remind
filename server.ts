@@ -39,8 +39,11 @@ app.get('*.*', express.static(DIST_FOLDER, {
 }));
 
 // All regular routes use the Universal engine
+app.get('/dashboard', (req, res) => {
+    res.render('index', { req });
+});
 app.get('*', (req, res) => {
-  res.render('index', { req });
+    res.sendFile(join(DIST_FOLDER, 'index.html'));
 });
 
 // Start up the Node server
