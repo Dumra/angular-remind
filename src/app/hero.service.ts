@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { Hero } from './hero';
 import { HEROES } from './mock-heroes';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
+import { APP_BASE_HREF } from '@angular/common';
 
 @Injectable({
     providedIn: 'root'
@@ -12,16 +13,18 @@ import { catchError, tap } from 'rxjs/operators';
 
 export class HeroService {
 
-    constructor(
-        private http: HttpClient,
-        private messageService: MessageService
-    ) {
-    }
-
     private heroesUrl = 'api/heroes';
 
     private log(message: string) {
         this.messageService.add(`HeroService: ${message}`);
+    }
+
+    constructor(
+        private http: HttpClient,
+        private messageService: MessageService,
+        @Optional() @Inject(APP_BASE_HREF) origin: string
+    ) {
+        this.heroesUrl = `${origin}${this.heroesUrl}`;
     }
 
     // getHeroes(): Observable<Hero[]> {

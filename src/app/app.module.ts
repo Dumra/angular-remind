@@ -25,7 +25,7 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
     HeroSearchComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     FormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
