@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { TransferHttpCacheModule } from '@nguniversal/common';
+import { PrebootModule } from 'preboot';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    PrebootModule.withConfig({ appRoot: 'app-root' }),
+    TransferHttpCacheModule,
     FormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
